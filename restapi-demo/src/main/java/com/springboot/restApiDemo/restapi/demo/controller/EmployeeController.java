@@ -1,6 +1,8 @@
 package com.springboot.restApiDemo.restapi.demo.controller;
 
+import com.springboot.restApiDemo.restapi.demo.entity.Employee;
 import com.springboot.restApiDemo.restapi.demo.entity.Student;
+import com.springboot.restApiDemo.restapi.demo.service.EmployeeService;
 import com.springboot.restApiDemo.restapi.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,40 +10,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("students")
-public class StudentController {
-    private StudentService service;
+@RequestMapping("employees")
+public class EmployeeController {
+    private EmployeeService service;
 
     @Autowired
-    public StudentController(StudentService service) {
+    public EmployeeController(EmployeeService service) {
         this.service = service;
     }
 
 
     @GetMapping()
-    public List<Student> all() {
+    public List<Employee> all() {
         return service.all();
     }
 
     @PostMapping()
-    public Student create(@RequestBody Student student) {
-        return service.create(student);
+    public Employee create(@RequestBody Employee employee) {
+        return service.create(employee);
     }
 
-    @GetMapping("/{id}")
-    public Student find(@PathVariable Integer id) {
-
-        return service.find(id);
-    }
+//    @GetMapping("/{id}")
+//    public Employee find(@PathVariable Integer id) {
+//
+//        //return service.find(id);
+//    }
 
     @PutMapping()
-    public Student update(@RequestBody Student student) {
-        return service.update(student);
+    public Employee update(@RequestBody Employee employee) {
+        return service.update(employee);
     }
 
     @DeleteMapping("/{id}")
-    public Student delete(@PathVariable Integer id) {
-        return service.delete(id);
+    public void delete(@PathVariable Integer id) {
+        service.delete(id);
     }
 
 

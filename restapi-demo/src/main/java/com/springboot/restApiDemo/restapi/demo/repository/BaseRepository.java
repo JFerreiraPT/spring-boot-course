@@ -4,12 +4,8 @@ import com.springboot.restApiDemo.restapi.demo.entity.Student;
 import com.springboot.restApiDemo.restapi.demo.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.NoRepositoryBean;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 @NoRepositoryBean
@@ -50,14 +46,12 @@ public class BaseRepository<T> implements IBaseRepository<T> {
     }
 
     @Override
-    @Transactional
     public <S extends T> S persist(S entity) {
         em.persist(entity);
         return entity;
     }
 
     @Override
-    @Transactional
     public <S extends T> S update(S entity) {
         em.merge(entity);
 
@@ -65,7 +59,6 @@ public class BaseRepository<T> implements IBaseRepository<T> {
     }
 
     @Override
-    @Transactional
     public <S extends T> S delete(Integer id) {
         S entity = this.findById(id);
 
